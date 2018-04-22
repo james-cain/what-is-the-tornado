@@ -3,7 +3,7 @@ import tornado.ioloop
 import tornado.web
 
 #  实现一个web.RequestHandler子类，重载其中的get()函数，该函数负责相应定位到该RequestHandler的HTTP GET请求的处理。
-class MainHandler(tonardo.web.RequestHandler):
+class MainHandler(tornado.web.RequestHandler):
   def get(self):
     self.write("Hello world")
 
@@ -41,16 +41,16 @@ class MainHandler(tonardo.web.RequestHandler):
 #   def get(self, year, month, day, slug):
 #     self.write("%d-%d-%d %s"%(year, month, day, slug))
 def make_app():
-  return tornardo.web.Application([
+  return tornado.web.Application([
     (r"/", MainHandler),
   ])
 
 def main():
   app = make_app()
   # 用web.Application.listen()函数指定服务器监听的端口
-  app.listen(8888)
+  app.listen(8800)
   # 用tornado.ioloop.IOLoop.current().start()启动IOLoop，该函数将一直运行且不退出，用户处理完所有客户端的访问请求。
-  tornardo.ioloop.IOLoop.current().start()
+  tornado.ioloop.IOLoop.current().start()
 
 if __name__ == "__main__":
   main()
