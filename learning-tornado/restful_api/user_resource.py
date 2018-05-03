@@ -25,6 +25,10 @@ class UserResource(RestHandler):
         daos.userDao.FieldUserPosterUrl: '/static/images/91kage.jpg',
         daos.userDao.FieldUserNo: '0',
     }
+    @get(_path="/api/user/json", _produces=mediatypes.APPLICATION_JSON)
+    def GetUserInfo(self):
+        return {'username': 'xl'}
+
     # get 方法使用 authenticated会跳转登录页。这里我们自己判断.
     # 参考 tornado web.py -- def authenticated(method):
     #@tornado.web.authenticated

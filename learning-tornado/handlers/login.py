@@ -32,33 +32,18 @@ class LoginHandler(base.BaseHandler):
     expiresTime = 3600 * 12
     #@tornado.web.asynchronous
     def get(self):
-
-        ## for test
-        #self.set_secure_cookie(self.secure_username, '8aa3ef66-2ad0-11e8-afc5-00163e0309bf')
-        #self.redirect('index.html')
-        #return
         # release code.
         #if self.current_user:
         #    self.redirect('index.html')
         #    return
         #else:
         #    print 'login ....'
-
-        # 无current_user, 此处暂时只有微信登录
-        code = self.get_argument('code', default=None)
-        # 没有code，还未授权，跳转授权页
-        if not code:
-            url = self.request.protocol + '://' + self.request.host + self.request.uri
-            print url
-            redirect_url = wx_oauth.GetUserOauth(url, 'first-redirect')
-            self.redirect(redirect_url)
-            return
-
-        if self.wx_login(code):
-            self.redirect('index.html')
-        else:
-            self.redirect('error.html')
-            logger.debug('登录失败')
+        self.redirect('index.html')
+        # if self.wx_login(code):
+            # self.redirect('index.html')
+        # else:
+        #     self.redirect('error.html')
+        #     logger.debug('登录失败')
 
     def wx_login(self, code):
 	
@@ -68,8 +53,8 @@ class LoginHandler(base.BaseHandler):
             self.write(str(ret))
 	    return False
 
-   	userInfo = json.loads(ret['userinfo'])
-	tokenInfo = json.loads(ret['token_data'])
+        userInfo = json.loads(ret['userinfo'])
+        tokenInfo = json.loads(ret['token_data'])
         userId = daos.userDao.QueryWeChat(userInfo['openid'])
         if not userId:
             parentUserId = self.get_argument('userid', default=None)

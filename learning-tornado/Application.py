@@ -7,9 +7,9 @@ from tornado.options import define, options
 from handlers.patterns import url_patterns
 from restful_api.resource_handlers import ResourceHandlers
 from restful.rest import RestService
-from handlers.static_file_handler_impl import AuthenticationStaticFileHandler
+# from handlers.static_file_handler_impl import AuthenticationStaticFileHandler
 
-define('port', default=8080, help='run on the given port', type=int)
+define('port', default=8999, help='run on the given port', type=int)
 
 class Application(tornado.web.Application):
     def __init__(self):

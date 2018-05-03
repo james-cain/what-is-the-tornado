@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 #   (2).RequestHandler.prepare()、RequestHandler.on_finish()
 #   prepare()方法用于调用请求处理（get、post等）方法之前的初始化处理。通常该方法做资源初始化操作
-#   on_finish()用于请求处理结束后的一些清理工作。通常该方法可做清理对象占用的内存或者关闭数据库连接等工作
+#   on_finish()用于请求处理结束后的一些清理工作。通常该方法可做清理对象占用的内存或者关闭数据库连接等工作。对于同步处理程序会在get()（等）后立即返回；对于异步处理程序，会在调用finish()后返回。
 #   (3).HTTP Action处理函数
 #   每个HTTP Action在RequestHandler中都以单独的函数进行处理
 #   RequestHandler.get(*args, **kwargs)
@@ -109,6 +109,9 @@ if __name__ == "__main__":
 #   arguments--客户端提交的所有参数
 #   files--以字典方式表达的客户端上传的文件，每个文件名对应一个HTTPFile
 #   cookies--客户端提交的Cookies字典
+#   (6).write_error 输出对错误页面使用的HTML
+#   (7).on_connection_close 当客户端断开时被调用；应用程序可以检测这种情况，并中断后续处理，注意这不能保证一个关闭的连接及时被发现
+#   (8).get_user_locale 返回Locale对象给当前用户使用
 # 3.输出相应函数
 #   指一组客户端生成处理结果的工具函数，开发者调用它们以控制URL的处理结果。
 #   (1).RequestHandler.set_status(status_code, reason=None) 设置HTTP Response中的返回码。
