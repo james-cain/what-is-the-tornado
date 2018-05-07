@@ -5,22 +5,37 @@ import base
 import MySQLdb
 
 class UserDao(base.DBBase):
-    UserTableName = 'User'
-    WeChatTableName = 'WeChat'
-    FieldOpenId = 'OpenId'
+    # UserTableName = 'User'
+    # WeChatTableName = 'WeChat'
+    # FieldOpenId = 'OpenId'
+    # FieldUserId = 'UserId'
+    # FieldUserNo = 'UserNo'
+    # FieldUserPhone = 'UserPhone'
+    # FieldUserName = 'UserName'
+    # FieldUserPosterUrl = 'UserPosterUrl'
+    # FieldUserWeChatId = 'UserWeChatId'
+    # FieldParentId = 'ParentId'
+    # FieldGrandParentId = 'GrandParentId'
+    # FieldGreatGrandParentId = 'GreatGrandParentId'
+    # FieldUserLevel = 'UserLevel'
+    # FieldUserMoney = 'UserShareBenefitMoney'
+    # FieldUserTotalMoney = 'UserTotalBenefit'
+    # FieldUserAddTime = 'UserAddTime'
+    UserTableName = 'UserTable'
     FieldUserId = 'UserId'
-    FieldUserNo = 'UserNo'
-    FieldUserPhone = 'UserPhone'
     FieldUserName = 'UserName'
-    FieldUserPosterUrl = 'UserPosterUrl'
-    FieldUserWeChatId = 'UserWeChatId'
-    FieldParentId = 'ParentId'
-    FieldGrandParentId = 'GrandParentId'
-    FieldGreatGrandParentId = 'GreatGrandParentId'
-    FieldUserLevel = 'UserLevel'
-    FieldUserMoney = 'UserShareBenefitMoney'
-    FieldUserTotalMoney = 'UserTotalBenefit'
-    FieldUserAddTime = 'UserAddTime'
+    FieldUserDuty = 'UserDuty'
+    FieldUserArea = 'UserArea'
+    FieldUserProfession = 'UserProfession'
+    FieldUserPhone = 'UserPhone'
+    FieldUserAddress = 'UserAddress'
+    FieldUserHobby = 'UserHobby'
+    FieldUserExperience = 'UserExperience'
+    FieldUserDepartment = 'UserDepartment'
+    FieldUserDeptIntroduce = 'UserDeptIntroduce'
+    FieldUserEnterprise = 'UserEnterprise'
+    FieldUserContribute = 'UserContribute' 
+
 
     def AddUserShareBenefitMoney(self, userId, money):
         sql = "update %s set %s = %s + %s, %s = %s + %s where %s = '%s'" % (
@@ -66,6 +81,12 @@ class UserDao(base.DBBase):
         ret = self.ExecuteResult(sql)
         if ret:
             return ret[0]
+
+    def QueryUserInfo(self):
+        sql = "select * from %s" % (self.UserTableName)
+        ret = self.ExecuteResult(sql)
+        if ret:
+            return ret
 
     def QueryParentUser(self, userId):
         sql = "select * from %s where %s = '%s'" % (self.UserTableName, self.FieldUserId, userId)
